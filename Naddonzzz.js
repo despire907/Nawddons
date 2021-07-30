@@ -57,4 +57,6 @@ const allianceChat = () => {
     init();
 }
 
-allianceChat()
+if (window.location.pathname !== "/chatalliance" || window.location.search.length > 0) {
+    allianceChat()
+}
