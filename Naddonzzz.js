@@ -42,7 +42,7 @@ const allianceChat = () => {
             'background-image': 'none'
         };
 
-        jq('.sideRight').before('<div id="allianceMessages"></div>').remove();
+        jq('.sideRight').before('<div id="allianceMessages"></div>');
         msgDiv = jq("#allianceMessages").attr('class', 'sideRight');
         msgDiv.css(msgDivCSS);
         msgDiv.append('<h4 style="text-align: center;">Chat d\'alliance</h4><input type="text" id="messageInput"><div id="allianceMessages"></div>');
