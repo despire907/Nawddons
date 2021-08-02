@@ -56,9 +56,34 @@ const totalArme = () => {
     init();
 }
 
+function formatConvois() {
+    const nodes = document.querySelectorAll('.cadreDescription table tbody tr');
+
+    nodes.forEach((tr, idx) => {
+        if (idx) {
+            const b = tr.children[3].querySelector('b')
+            const a = b.querySelector('a');
+            const name = a.querySelector('b').innerHTML;
+            const atk = a.getAttribute('href');
+            const convoi = atk.replace('attaques', 'convois');
+
+            b.innerHTML = (`${name}  <a href="${atk}">⚔️</a>  <a href="${convoi}">🍎</a>`);
+        }
+    });
+}
+
+function setValue() {
+    jq('#infoOuvriRecolte').attr("value", Number($('#terrain').val()));
+    jq('button[type=submit]').click();
+}
+
+function createBtn() {
+    jq('form').before('<button id="setMax">Max</button>');
+    jq('#setMax').click(() => setValue());
+}
+
 const allianceChat = () => {
     let msgDiv;
-    let dom;
 
     const getMessages = () => {
         var requestOptions = {
@@ -104,9 +129,13 @@ const allianceChat = () => {
     init();
 }
 
-if ((window.location.pathname !== "/chatalliance" && window.location.pathname !== "/chatgeneral" && window.location.pathname !== "/armee") || window.location.search.length > 0) {
+if ((window.location.pathname !== "/chatalliance" && window.location.pathname !== "/chatgeneral") || window.location.search.length > 0) {
     allianceChat();
-} else if (window.location.pathname === "/armee" || window.location.search.length > 0) {
-    allianceChat();
-    totalArme();
+    if (window.location.pathname === "/armee") {
+        totalArme();
+    } else if (window.location.pathname === "/membre") {
+        formatConvois();
+    } else if (window.location.pathname === "/recolte") {
+        createBtn();
+    }
 }
