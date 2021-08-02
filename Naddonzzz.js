@@ -2,7 +2,59 @@
 
 var jq = jQuery.noConflict();
 
-console.log(jq.fn.jQuery)
+const totalArme = () => {
+    const calcTerrain = () => {
+        var result = 0;
+        let i = 6;
+        while(i < 72) {
+            result += Number(jq(".table-striped.col-xs-12.col-sm-12.col-md-12.col-lg-12").children("tbody").children("tr").children("td")[i].innerText.replace(/\s/g, ''));
+            i += 5;
+        }
+        return result;
+    }
+
+    const calcDome = () => {
+        var result = 0;
+        let i = 7;
+        while(i < 73) {
+            result += Number(jq(".table-striped.col-xs-12.col-sm-12.col-md-12.col-lg-12").children("tbody").children("tr").children("td")[i].innerText.replace(/\s/g, ''));
+            i += 5;
+        }
+        return result;
+    }
+
+    const calcLoge = () => {
+        var result = 0;
+        let i = 8;
+        while(i < 74) {
+            result += Number(jq(".table-striped.col-xs-12.col-sm-12.col-md-12.col-lg-12").children("tbody").children("tr").children("td")[i].innerText.replace(/\s/g, ''));
+            i += 5;
+        }
+        return result;
+    }
+
+    const calcTotal = () => {
+        var result = 0;
+        let i = 9;
+        while(i < 75) {
+            result += Number(jq(".table-striped.col-xs-12.col-sm-12.col-md-12.col-lg-12").children("tbody").children("tr").children("td")[i].innerText.replace(/\s/g, ''));
+            i += 5;
+        }
+        return result;
+    }
+
+    const init = () => {
+        let tr = document.createElement("tr");
+        jq(".table-striped.col-xs-12.col-sm-12.col-md-12.col-lg-12").children("tbody").children("tr")[20].after(tr);
+        jq(".table-striped.col-xs-12.col-sm-12.col-md-12.col-lg-12").children("tbody").children("tr")[21].id = "AT";
+        jq('#AT').append("<td><div class=\"vu-mobile\">🐜</div><div class=\"vu-pc\">Armée Totale</div></td><td id=\"TT\">🐜 0</td><td id=\"TD\">🐜 0</td><td id=\"TL\">🐜 0</td><td><div id=\"TG\">🐜 0</div></td>");
+        document.getElementById('TT').innerHTML = "🐜 " + calcTerrain().toString();
+        document.getElementById('TD').innerHTML = "🐜 " + calcDome().toString();
+        document.getElementById('TL').innerHTML = "🐜 " + calcLoge().toString();
+        document.getElementById('TG').innerHTML = "🐜 " + calcTotal().toString();
+    }
+    init();
+}
 
 const allianceChat = () => {
     let msgDiv;
@@ -52,6 +104,9 @@ const allianceChat = () => {
     init();
 }
 
-if ((window.location.pathname !== "/chatalliance" && window.location.pathname !== "/chatgeneral") || window.location.search.length > 0) {
+if ((window.location.pathname !== "/chatalliance" && window.location.pathname !== "/chatgeneral" && window.location.pathname !== "/armee") || window.location.search.length > 0) {
     allianceChat();
+} else if (window.location.pathname === "/armee" || window.location.search.length > 0) {
+    allianceChat();
+    totalArme();
 }
