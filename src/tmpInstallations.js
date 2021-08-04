@@ -154,7 +154,7 @@ const tmpInstallations = () => {
                 i += 1;
             }
         }
-        setTimeout(tmpInstallations, 1000);
+        setTimeout(tmp, 1000);
     }
 
     let script = document.getElementsByTagName("script")[document.getElementsByTagName("script").length - 1].innerHTML;
