@@ -53,9 +53,9 @@ const tmpRecherches = () => {
             needBois = 0;
             needEau = 0;
             if (document.getElementById("sectionUniteCout" + i.toString()).children[0].children[0].title === "Ouvrière" && document.getElementById("sectionUniteCout" + i.toString()).children[0].children[4].title === "Nourriture" && document.getElementById("sectionUniteCout" + i.toString()).children[0].children[8].title === "Bois" && document.getElementById("sectionUniteCout" + i.toString()).children[0].children[12].title === "Eau") {
-                needPomme = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[5].innerText;
-                needBois = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[9].innerText;
-                needEau = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[13].innerText;
+                needPomme = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[5].innerText);
+                needBois = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[9].innerText);
+                needEau = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[13].innerText);
                 if (parseFloat(needPomme) > parseFloat(stockPomme) || parseFloat(needBois) > parseFloat(stockBois) || parseFloat(needEau) > parseFloat(stockEau)) {
                     if (document.getElementById("myspan" + i.toString()) !== null) {
                         document.getElementById("myspan" + i.toString()).innerText = "⏲️ Améliore le stock";
@@ -175,8 +175,8 @@ const tmpRecherches = () => {
                     }
                 }
             } else if (document.getElementById("sectionUniteCout" + i.toString()).children[0].children[0].title === "Bois" && document.getElementById("sectionUniteCout" + i.toString()).children[0].children[4].title === "Eau") {
-                needBois = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[1].innerText;
-                needEau = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[5].innerText;
+                needBois = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[1].innerText);
+                needEau = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[5].innerText);
                 if (parseFloat(needBois) > parseFloat(stockBois) || parseFloat(needEau) > parseFloat(stockEau)) {
                     if (document.getElementById("myspan" + i.toString()) !== null) {
                         document.getElementById("myspan" + i.toString()).innerText = "⏲️ Améliore le stock";
@@ -223,7 +223,7 @@ const tmpRecherches = () => {
                     }
                 }
             } else if (document.getElementById("sectionUniteCout" + i.toString()).children[0].children[0].title === "Bois") {
-                needBois = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[1].innerText;
+                needBois = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[1].innerText);
                 if (parseFloat(needBois) > parseFloat(stockBois)) {
                     if (document.getElementById("myspan" + i.toString()) !== null) {
                         document.getElementById("myspan" + i.toString()).innerText = "⏲️ Améliore le stock";
@@ -256,9 +256,9 @@ const tmpRecherches = () => {
                     temps = 0;
                 }
             } else if (document.getElementById("sectionUniteCout" + i.toString()).children[0].children[0].title === "Ouvrière" && document.getElementById("sectionUniteCout" + i.toString()).children[0].children[4].title === "Ouvrière d'élite" && document.getElementById("sectionUniteCout" + i.toString()).children[0].children[8].title === "Nourriture" && document.getElementById("sectionUniteCout" + i.toString()).children[0].children[12].title === "Bois" && document.getElementById("sectionUniteCout" + i.toString()).children[0].children[16].title === "Eau") {
-                needPomme = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[9].innerText;
-                needBois = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[13].innerText;
-                needEau = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[17].innerText;
+                needPomme = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[9].innerText);
+                needBois = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[13].innerText);
+                needEau = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[17].innerText);
                 if (parseFloat(needPomme) > parseFloat(stockPomme) || parseFloat(needBois) > parseFloat(stockBois) || parseFloat(needEau) > parseFloat(stockEau)) {
                     if (document.getElementById("myspan" + i.toString()) !== null) {
                         document.getElementById("myspan" + i.toString()).innerText = "⏲️ Améliore le stock";
@@ -317,8 +317,8 @@ const tmpRecherches = () => {
                     }
                 }
             } else if (document.getElementById("sectionUniteCout" + i.toString()).children[0].children[0].title === "Nourriture" && document.getElementById("sectionUniteCout" + i.toString()).children[0].children[4].title === "Eau") {
-                needPomme = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[1].innerText;
-                needEau = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[5].innerText;
+                needPomme = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[1].innerText);
+                needEau = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[5].innerText);
                 if (parseFloat(needPomme) > parseFloat(stockPomme) || parseFloat(needEau) > parseFloat(stockEau)) {
                     if (document.getElementById("myspan" + i.toString()) !== null) {
                         document.getElementById("myspan" + i.toString()).innerText = "⏲️ Améliore le stock";
@@ -365,8 +365,8 @@ const tmpRecherches = () => {
                     }
                 }
             } else if (document.getElementById("sectionUniteCout" + i.toString()).children[0].children[0].title === "Ouvrière" && document.getElementById("sectionUniteCout" + i.toString()).children[0].children[4].title === "Nourriture" && document.getElementById("sectionUniteCout" + i.toString()).children[0].children[8].title === "Eau") {
-                needPomme = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[5].innerText;
-                needEau = document.getElementById("sectionUniteCout" + i.toString()).children[0].children[9].innerText;
+                needPomme = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[5].innerText);
+                needEau = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[9].innerText);
                 if (parseFloat(needPomme) > parseFloat(stockPomme) || parseFloat(needEau) > parseFloat(stockEau)) {
                     if (document.getElementById("myspan" + i.toString()) !== null) {
                         document.getElementById("myspan" + i.toString()).innerText = "⏲️ Améliore le stock";
