@@ -57,19 +57,19 @@ const tmpInstallations = () => {
                 needEau = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[9].innerText);
                 if (parseFloat(needPomme) > parseFloat(stockPomme) || parseFloat(needBois) > parseFloat(stockBois) || parseFloat(needEau) > parseFloat(stockEau)) {
                     if (document.getElementById("myspan" + i.toString()) !== null) {
-                        document.getElementById("myspan" + i.toString()).innerText = "⏲️ Améliore le stock frérot";
+                        document.getElementById("myspan" + i.toString()).innerText = "⏲️ Améliore le stock";
                     } else {
                         span.id = "myspan" + i.toString();
-                        span.textContent = "⏲️ Améliore le stock frérot";
+                        span.textContent = "⏲️ Améliore le stock";
                         document.getElementById("tempsUnite" + i.toString()).after(span);
                         document.getElementById("tempsUnite" + i.toString()).after(br);
                     }
                 } else if (parseFloat(needPomme) < parseFloat(ressourcePomme) && parseFloat(needBois) < parseFloat(ressourceBois) && parseFloat(needEau) < parseFloat(ressourceEau)) {
                     if (document.getElementById("myspan" + i.toString()) !== null) {
-                        document.getElementById("myspan" + i.toString()).innerText = "⏲️ Tu peux améliorer !";
+                        document.getElementById("myspan" + i.toString()).innerText = "⏲️ Tu peux améliorer";
                     } else {
                         span.id = "myspan" + i.toString();
-                        span.textContent = "⏲️ Tu peux améliorer !";
+                        span.textContent = "⏲️ Tu peux améliorer";
                         document.getElementById("tempsUnite" + i.toString()).after(span);
                         document.getElementById("tempsUnite" + i.toString()).after(br);
                     }
@@ -116,19 +116,19 @@ const tmpInstallations = () => {
                 needBois = removeExtraSpace(document.getElementById("sectionUniteCout" + i.toString()).children[0].children[1].innerText);
                 if (parseFloat(needBois) > parseFloat(stockBois)) {
                     if (document.getElementById("myspan" + i.toString()) !== null) {
-                        document.getElementById("myspan" + i.toString()).innerText = "⏲️ Améliore le stock frérot";
+                        document.getElementById("myspan" + i.toString()).innerText = "⏲️ Améliore le stock";
                     } else {
                         span.id = "myspan" + i.toString();
-                        span.textContent = "⏲️ Améliore le stock frérot";
+                        span.textContent = "⏲️ Améliore le stock";
                         document.getElementById("tempsUnite" + i.toString()).after(span);
                         document.getElementById("tempsUnite" + i.toString()).after(br);
                     }
                 } else if (parseFloat(needBois) < parseFloat(ressourceBois)) {
                     if (document.getElementById("myspan" + i.toString()) !== null) {
-                        document.getElementById("myspan" + i.toString()).innerText = "⏲️ Tu peux améliorer !";
+                        document.getElementById("myspan" + i.toString()).innerText = "⏲️ Tu peux améliorer";
                     } else {
                         span.id = "myspan" + i.toString();
-                        span.textContent = "⏲️ Tu peux améliorer !";
+                        span.textContent = "⏲️ Tu peux améliorer";
                         document.getElementById("tempsUnite" + i.toString()).after(span);
                         document.getElementById("tempsUnite" + i.toString()).after(br);
                     }
