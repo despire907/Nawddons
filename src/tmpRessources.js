@@ -217,6 +217,4 @@ const tmpRessources = () => {
     tmp();
 }
 
-tmpRessources();
-
-export default checkInit(['/ressources'], [], );
+export default checkInit(['/ressources'], [], tmpRessources);
