@@ -174,6 +174,4 @@ const tmpInstallations = () => {
     tmp();
 }
 
-tmpInstallations();
-
-export default checkInit(['/installations'], [], );
+export default checkInit(['/installations'], [], tmpInstallations);
