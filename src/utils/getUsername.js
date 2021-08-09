@@ -1,0 +1,1 @@
+export default () => $('.interieur center').text().split(' ')[1];

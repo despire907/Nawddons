@@ -1,0 +1,1 @@
+export default str => Number(str.replace(/\s/g, ''));
