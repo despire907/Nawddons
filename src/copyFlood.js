@@ -11,9 +11,9 @@ const copyFlood = () => {
             $(tr).append('<td></td>');
         } else {
             const btnId = `copy${idx}`;
-            const type = tr.children[1].innerText.split(' -- ')[0];
             $(tr).append(`<td><button id="${btnId}">Copier</button></td>`);
             $(`#${btnId}`).click(() => {
+                const type = tr.children[1].innerText.split(' -- ')[0];
                 const content = [new ClipboardItem({"text/plain": new Blob([copyFunctions[type](tr)], {type: "text/plain"})})];
                 navigator.clipboard.write(content);
             });
