@@ -15,7 +15,7 @@ function convoiMembre() {
             const convoi = atk.replace('attaques', 'convois');
 
             let html = name;
-            if (tdc <= actualTdc * 2 || tdc >= Math.round(actualTdc / 3)) {
+            if (tdc <= actualTdc * 3 && tdc >= Math.round(actualTdc / 2)) {
                 html += `  <a href="${atk}">⚔️</a>`;
             }
             html += `  <a href="${convoi}">🍎</a>`;
