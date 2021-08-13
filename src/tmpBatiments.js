@@ -62,14 +62,16 @@ const tmpBatiments = () => {
         }
     }
 
-    function putText(i, temps) {
+    function putText(i, temps, color) {
         let span = document.createElement('span');
         let br = document.createElement('br');
         if (document.getElementById("myspan" + i.toString()) !== null) {
             document.getElementById("myspan" + i.toString()).innerText = "⏲️ " + temps;
+            document.getElementById("myspan" + i.toString()).style.color = color;
         } else {
             span.id = "myspan" + i.toString();
             span.textContent = "⏲️ " + temps;
+            span.style.color = color;
             document.getElementById("tempsUnite" + i.toString()).after(span);
             document.getElementById("tempsUnite" + i.toString()).after(br);
         }
@@ -79,20 +81,20 @@ const tmpBatiments = () => {
         let temps;
         if (parseFloat(needPomme) > parseFloat(stockPomme) || parseFloat(needBois) > parseFloat(stockBois) || parseFloat(needEau) > parseFloat(stockEau)) {
             temps = "Stock up";
-            putText(i, temps);
+            putText(i, temps, "red");
         } else if (parseFloat(needPomme) < parseFloat(ressourcePomme) && parseFloat(needBois) < parseFloat(ressourceBois) && parseFloat(needEau) < parseFloat(ressourceEau)) {
             temps = "Good";
-            putText(i, temps);
+            putText(i, temps, "green");
         } else {
             if (timePomme > timeBois && timePomme > timeEau) {
                 temps = timeFormat(timePomme);
-                putText(i, temps);
+                putText(i, temps, "chocolate");
             } else if (timeBois > timePomme && timeBois > timeEau) {
                 temps = timeFormat(timeBois);
-                putText(i, temps);
+                putText(i, temps, "chocolate");
             } else if (timeEau > timePomme && timeEau > timeBois) {
                 temps = timeFormat(timeEau);
-                putText(i, temps);
+                putText(i, temps, "chocolate");
             }
         }
     }
