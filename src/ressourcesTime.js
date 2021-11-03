@@ -73,7 +73,7 @@ const resourcesTime = () => {
                 else if (askTime.lastIndexOf('A') !== -1)
                     OToCraft = Oyear * askTime.substr(0, askTime.lastIndexOf('A'));
 
-                document.getElementById("${pondreUniteId}").value = OToCraft;;
+                document.getElementById("${pondreUniteId}").value = OToCraft;
             })
         </script>`;
 
