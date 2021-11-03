@@ -95,4 +95,4 @@ const resourcesTime = () => {
     init();
 }
 
-export default checkInit(['/reine'], ['/ressourcesTime'], resourcesTime());
+export default checkInit(['/reine'], [], resourcesTime);
