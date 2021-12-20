@@ -17,14 +17,35 @@ const resourcesTime = () => {
 
         const position = `#sectionUniteCout${count}`;
 
+        $(position).after(`
+            <div class="img--container">
+                <img src="./public/images/time.png" class="image-1 iconecss" alt="Temps"> temps
+                <input id="${timer}" class="form-control ecriture" value="${Otimer}" />
+            </div>
+            <div class="img--container">
+                <img class=" image-1 iconecss" src="./public/images/1ressource.png" alt="Nourriture"> pommes
+                <input id="${apple}" class="form-control ecriture" value="${AppleTimer}" />
+            </div>       
+            <style>
+                .img--container {
+                    border: 3px solid #62441D;
+                    border-radius: 8px;
+                    background: #9C723A;
+                    margin-bottom: inherit;
+                }
+                .image-1 {
+                    object-position: 50% 50%;
+                }
+            </style>
+        `);
 
-        $(position).after(`<input id="${timer}" class="form-control ecriture" value="${Otimer}" />`);
-        $(position).after(`<input id="${apple}" class="form-control ecriture" value="${AppleTimer}" />`);
+        $(position).remove()
 
         const actualize_apple = `<script>document.getElementById("${apple}").addEventListener("input", 
             function() {
                 const price = parseInt("${AppleTimer}", 10);
                 const input = document.getElementById("${apple}").value;
+                
                 //TODO check spaces in input
                 
                 //TODO check maximum capacity
@@ -37,6 +58,9 @@ const resourcesTime = () => {
                 if (OToCraft.lastIndexOf('.') !== -1)
                     OToCraft = OToCraft.substr(0, OToCraft.lastIndexOf('.'))               
 
+                if (input === "000") {
+                    OToCraft = 0;
+                }
                 document.getElementById("${pondreUniteId}").value = OToCraft;
             })
         </script>`;
@@ -50,14 +74,21 @@ const resourcesTime = () => {
                 var Ohour = 0;
                 
                 if (unitTime.lastIndexOf('m') === -1) {
-                    Ominute = 60 / parseFloat(unitTime);
+                    console.log("Second unit");
+                    var temp = parseFloat(unitTime) 
+                    console.log(temp);
+                    Ominute = 60 / temp;
                     Ominute = Ominute.toString();
+                    console.log(temp);
                     if(Ominute.lastIndexOf('.') !== -1)
                         Ominute = parseInt(Ominute.substr(0, Ominute.lastIndexOf('.')), 10);
                     Ohour = 60 * Ominute
-                } else
+                } else {
+                    console.log("Minute unit");
                     Ohour = 60 / parseFloat(unitTime);
-                
+                }
+                console.log("Ohour = ");
+                console.log(Ohour);
                 const Oday = 24 * Ohour;               
                 const Omonth = 30 * Oday;
                 const Oyear = 365 * Omonth;
@@ -77,11 +108,10 @@ const resourcesTime = () => {
             })
         </script>`;
 
-        $(resource).after(actualize_apple);
-        $(resource).after(actualize_time);
-
-        //$(tempsUnite).remove();
-        //$(resource).remove();
+        const placement = `#${pondreUniteId}`;
+        $(placement).after(actualize_apple);
+        $(placement).after(actualize_time);
+        $(placement).val(1);
     }
 
     const init = () => {
