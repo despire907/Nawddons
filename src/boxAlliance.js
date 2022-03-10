@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import checkInit from './checkInit'
+import { setCookie, getCookie } from './utils/manageCookies';
 
 function getTdc(name) {
     var requestOptions = {
@@ -16,23 +17,23 @@ function getTdc(name) {
                 const goodCell = goodTabs.getElementsByTagName("tr")[2];
                 const tdc = goodCell.getElementsByTagName("td")[2].innerText;
 
-                $(`#tdc-${name}`).append(tdc);
+                setCookie(`${name}Tdc`, tdc, 1);
         })
         .catch(error => console.error('error : ', error))
 }
 
-function addAlliance(name) {
+function runAlliance(name) {
     const link = "https://www.natureatwar.fr/descriptionalliance-" + name;
+    const tdc = getCookie(`${name}Tdc`);
     const unit = `
     <tr>
         <td>
             <a href="${link}">${name} - </a>
         </td>       
-        <td style="text-align :left" id="tdc-${name}"></td>
+        <td style="text-align :left" id="tdc-${name}">${tdc}</td>
     </tr>`;
-    
+
     $('#boxAlliance').append(unit);
-    getTdc(name);
 
     return unit;
 }
@@ -52,10 +53,19 @@ function initBox(){
 }
 
 function boxAlliance() {
-    initBox();
+    
+    const pathname = window.location.pathname;
+    const vueDensemble = "/vuedensemble";
+    
+    if (vueDensemble.includes(pathname))
+    {
+        getTdc("OFC");
+        getTdc("LN");
+    }
 
-    addAlliance("OFC");
-    addAlliance("LN");
+    initBox();
+    runAlliance("OFC");
+    runAlliance("LN");
 }
 
 export default checkInit([], [], boxAlliance);
