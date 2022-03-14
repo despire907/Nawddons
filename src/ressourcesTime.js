@@ -21,13 +21,13 @@ const resourcesTime = () => {
 
         $(position).after(`
             <div class="img--container">
-                <img src="./public/images/time.png" class="image-1 iconecss" alt="Temps"> temps
+                <img src="./public/images/time.png" class="image-1 iconecss" alt="Temps"> temps (m, h, j, M)
                 <input id="${timer}" class="form-control ecriture" value="${Otimer}" />
             </div>
             <div class="img--container">
                 <img class=" image-1 iconecss" src="./public/images/1ressource.png" alt="Nourriture"> pommes
                 <input id="${apple}" class="form-control ecriture" value="${AppleTimer}" />
-            </div>       
+            </div>
             <style>
                 .img--container {
                     border: 3px solid #62441D;
