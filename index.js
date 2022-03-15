@@ -63,8 +63,17 @@ function actualiseFromTime(box) {
     $(`#pondreUnite${box}`).val(toCraftNoDecimal);
 }
 
+function actualiseFromApple(box) {
+    const askApple = $(`#apple${box}`).val();
+    const unitApple = $(`#ressource${box}`).text();
+
+    const toCraft = askApple / unitApple
+    $(`#pondreUnite${box}`).val(toCraft);
+}
+
 $("#apple1").on("change keyup paste", function() {
     console.log("Ouvri : modif nb pommes");
+    actualiseFromApple(1);
 })
 
 $("#timer1").on("change keyup paste", function() {
