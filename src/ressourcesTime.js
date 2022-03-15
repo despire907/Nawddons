@@ -18,8 +18,8 @@ const resourcesTime = () => {
         } else if (askTime.lastIndexOf('M') !== -1) {
             askTime = removeUnit(askTime, 'M')
             askTimeInSecond = askTime * 60 * 60 * 24 * 30;
-        } else
-            console.log(askTime);
+        }
+
         return askTimeInSecond;
     }
     
@@ -38,6 +38,8 @@ const resourcesTime = () => {
     
     function removeDecimal(decimal) {
         const decimalIndex = decimal.toString().lastIndexOf('.');
+        if (decimalIndex === -1)
+            return decimal;
         return decimal.toString().substring(0, decimalIndex);
     }
     
@@ -62,7 +64,8 @@ const resourcesTime = () => {
         const unitApple = $(`#ressource${box}`).text();
     
         const toCraft = askApple / unitApple
-        $(`#pondreUnite${box}`).val(toCraft);
+        const toCraftNoDecimal = removeDecimal(toCraft);
+        $(`#pondreUnite${box}`).val(toCraftNoDecimal);
     }
 
     function placeBoxByUnit(count) {
@@ -115,17 +118,8 @@ const resourcesTime = () => {
     init();
 
     for (let i = 0; i < 24; i++) {   
-      $(`#apple${i}`).on("change keyup paste", function() {
-            console.log("Ouvri : modif nb pommes");
-           actualiseFromApple(i);
-       })
-      $(`#timer${i}`).on("change keyup paste", function() {
-            console.log("Ouvri : modif timer");
-            actualiseFromTime(i);
-        })
-       $(`#pondreUnite${i}`).on("change keyup paste", function() {
-            console.log("Ouvri : modif nb to craft");
-        })
+      $(`#apple${i}`).on("change keyup paste", () => actualiseFromApple(i))
+      $(`#timer${i}`).on("change keyup paste", () => actualiseFromTime(i))
     }
 }
 
