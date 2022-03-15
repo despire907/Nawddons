@@ -3,6 +3,68 @@ import checkInit from "./checkInit";
 
 const resourcesTime = () => {
 
+    function SecondConvert(askTime) {
+        let askTimeInSecond;
+    
+        if (askTime.lastIndexOf('m') !== -1) {
+            askTime = removeUnit(askTime, 'm')
+            askTimeInSecond = askTime * 60;
+        } else if (askTime.lastIndexOf('h') !== -1) {
+            askTime = removeUnit(askTime, 'h')
+            askTimeInSecond = askTime * 60 * 60;
+        } else if (askTime.lastIndexOf('j') !== -1) {
+            askTime = removeUnit(askTime, 'j')
+            askTimeInSecond = askTime * 60 * 60 * 24;
+        } else if (askTime.lastIndexOf('M') !== -1) {
+            askTime = removeUnit(askTime, 'M')
+            askTimeInSecond = askTime * 60 * 60 * 24 * 30;
+        } else
+            console.log(askTime);
+        return askTimeInSecond;
+    }
+    
+    function removeUnit(time, toRemove) {
+        var tab = time.split('');
+        const find = tab.findIndex(e => e === toRemove);
+    
+        if (find == undefined)
+            return time;
+    
+        tab.splice(find, 1);
+        const result = tab.join('');
+    
+        return result;
+    }
+    
+    function removeDecimal(decimal) {
+        const decimalIndex = decimal.toString().lastIndexOf('.');
+        return decimal.toString().substring(0, decimalIndex);
+    }
+    
+    function actualiseFromTime(box) {
+        const askTime = $(`#timer${box}`).val();
+        const unitTime = $(`#tempsUnite${box}`).text();
+    
+        const unitTimeinS = removeUnit(unitTime);
+        const askTimeinS = SecondConvert(askTime);
+    
+        const toCraft = askTimeinS / unitTimeinS;
+    
+        const toCraftNoDecimal = removeDecimal(toCraft);
+        const convertInApple = removeDecimal(toCraft * $(`#ressource${box}`).text());
+    
+        $(`#pondreUnite${box}`).val(toCraftNoDecimal);
+        $(`#apple${box}`).val(convertInApple);
+    }
+    
+    function actualiseFromApple(box) {
+        const askApple = $(`#apple${box}`).val();
+        const unitApple = $(`#ressource${box}`).text();
+    
+        const toCraft = askApple / unitApple
+        $(`#pondreUnite${box}`).val(toCraft);
+    }
+
     function placeBoxByUnit(count) {
         const tempsUnite = `#tempsUnite${count}`;
         const resource = `#ressource${count}`;
@@ -40,7 +102,6 @@ const resourcesTime = () => {
                 }
             </style>
         `);
-        //$(position).remove()
     }
 
     const init = () => {
@@ -52,6 +113,20 @@ const resourcesTime = () => {
     }
 
     init();
+
+    for (let i = 0; i < 24; i++) {   
+      $(`#apple${i}`).on("change keyup paste", function() {
+            console.log("Ouvri : modif nb pommes");
+           actualiseFromApple(i);
+       })
+      $(`#timer${i}`).on("change keyup paste", function() {
+            console.log("Ouvri : modif timer");
+            actualiseFromTime(i);
+        })
+       $(`#pondreUnite${i}`).on("change keyup paste", function() {
+            console.log("Ouvri : modif nb to craft");
+        })
+    }
 }
 
 export default checkInit(['/reine'], [], resourcesTime);
