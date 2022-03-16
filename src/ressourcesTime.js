@@ -3,12 +3,77 @@ import checkInit from "./checkInit";
 
 const resourcesTime = () => {
 
-    function timeByUnit(count) {
+    function SecondConvert(askTime) {
+        let askTimeInSecond;
+    
+        if (askTime.lastIndexOf('m') !== -1) {
+            askTime = removeUnit(askTime, 'm')
+            askTimeInSecond = askTime * 60;
+        } else if (askTime.lastIndexOf('h') !== -1) {
+            askTime = removeUnit(askTime, 'h')
+            askTimeInSecond = askTime * 60 * 60;
+        } else if (askTime.lastIndexOf('j') !== -1) {
+            askTime = removeUnit(askTime, 'j')
+            askTimeInSecond = askTime * 60 * 60 * 24;
+        } else if (askTime.lastIndexOf('M') !== -1) {
+            askTime = removeUnit(askTime, 'M')
+            askTimeInSecond = askTime * 60 * 60 * 24 * 30;
+        }
+
+        return askTimeInSecond;
+    }
+    
+    function removeUnit(time, toRemove) {
+        var tab = time.split('');
+        const find = tab.findIndex(e => e === toRemove);
+    
+        if (find == undefined)
+            return time;
+    
+        tab.splice(find, 1);
+        const result = tab.join('');
+    
+        return result;
+    }
+    
+    function removeDecimal(decimal) {
+        const decimalIndex = decimal.toString().lastIndexOf('.');
+        if (decimalIndex === -1)
+            return decimal;
+        return decimal.toString().substring(0, decimalIndex);
+    }
+    
+    function actualiseFromTime(box) {
+        const askTime = $(`#timer${box}`).val();
+        const unitTime = $(`#tempsUnite${box}`).text();
+    
+        const unitTimeinS = removeUnit(unitTime);
+        const askTimeinS = SecondConvert(askTime);
+    
+        const toCraft = askTimeinS / unitTimeinS;
+    
+        const toCraftNoDecimal = removeDecimal(toCraft);
+        const convertInApple = removeDecimal(toCraft * $(`#ressource${box}`).text());
+    
+        $(`#pondreUnite${box}`).val(toCraftNoDecimal);
+        $(`#apple${box}`).val(convertInApple);
+    }
+    
+    function actualiseFromApple(box) {
+        const askApple = $(`#apple${box}`).val();
+        const unitApple = $(`#ressource${box}`).text();
+    
+        const toCraft = askApple / unitApple
+        const toCraftNoDecimal = removeDecimal(toCraft);
+        $(`#pondreUnite${box}`).val(toCraftNoDecimal);
+    }
+
+    function placeBoxByUnit(count) {
         const tempsUnite = `#tempsUnite${count}`;
         const resource = `#ressource${count}`;
 
-        const timer = `#timer${count}`;
-        const apple = `#apple${count}`;
+        const timer = `timer${count}`;
+        const apple = `apple${count}`;
 
         const pondreUniteId = `pondreUnite${count}`;
 
@@ -17,82 +82,45 @@ const resourcesTime = () => {
 
         const position = `#sectionUniteCout${count}`;
 
+        $(`#${pondreUniteId}`).val(1);
 
-        $(position).after(`<input id="${timer}" class="form-control ecriture" value="${Otimer}" />`);
-        $(position).after(`<input id="${apple}" class="form-control ecriture" value="${AppleTimer}" />`);
-
-        const actualize_apple = `<script>document.getElementById("${apple}").addEventListener("input", 
-            function() {
-                const price = parseInt("${AppleTimer}", 10);
-                const input = document.getElementById("${apple}").value;
-                //TODO check spaces in input
-                
-                //TODO check maximum capacity
-                //const stockPomme = removeExtraSpace(document.getElementsByName("dynamise3")[0].innerHTML);
-                //const maxToCraft = stockPomme / price;
-
-                var OToCraft = input / price;
-                OToCraft = OToCraft.toString();
-                
-                if (OToCraft.lastIndexOf('.') !== -1)
-                    OToCraft = OToCraft.substr(0, OToCraft.lastIndexOf('.'))               
-
-                document.getElementById("${pondreUniteId}").value = OToCraft;
-            })
-        </script>`;
-
-        const actualize_time = `<script>document.getElementById("${timer}").addEventListener("input", 
-            function() {
-                var OToCraft = 0;
-                const unitTime = "${Otimer}";
-                const askTime = document.getElementById("${timer}").value.toString(); 
-                var Ominute = 0;
-                var Ohour = 0;
-                
-                if (unitTime.lastIndexOf('m') === -1) {
-                    Ominute = 60 / parseFloat(unitTime);
-                    Ominute = Ominute.toString();
-                    if(Ominute.lastIndexOf('.') !== -1)
-                        Ominute = parseInt(Ominute.substr(0, Ominute.lastIndexOf('.')), 10);
-                    Ohour = 60 * Ominute
-                } else
-                    Ohour = 60 / parseFloat(unitTime);
-                
-                const Oday = 24 * Ohour;               
-                const Omonth = 30 * Oday;
-                const Oyear = 365 * Omonth;
-                
-                if (askTime.lastIndexOf('m') !== -1)
-                    OToCraft = Ominute * askTime.substr(0, askTime.lastIndexOf('m'));
-                else if (askTime.lastIndexOf('h') !== -1)
-                    OToCraft = Ohour * askTime.substr(0, askTime.lastIndexOf('h'));
-                else if (askTime.lastIndexOf('j') !== -1)
-                    OToCraft = Oday * askTime.substr(0, askTime.lastIndexOf('j'));
-                else if (askTime.lastIndexOf('M') !== -1)
-                    OToCraft = Omonth * askTime.substr(0, askTime.lastIndexOf('M'));
-                else if (askTime.lastIndexOf('A') !== -1)
-                    OToCraft = Oyear * askTime.substr(0, askTime.lastIndexOf('A'));
-
-                document.getElementById("${pondreUniteId}").value = OToCraft;
-            })
-        </script>`;
-
-        $(resource).after(actualize_apple);
-        $(resource).after(actualize_time);
-
-        //$(tempsUnite).remove();
-        //$(resource).remove();
+        $(position).after(`
+            <div class="img--container">
+                <img src="./public/images/time.png" class="image-1 iconecss" alt="Temps"> temps (m, h, j, M)
+                <input id="${timer}" class="form-control ecriture" value="${Otimer}" />
+            </div>
+            <div class="img--container">
+                <img class=" image-1 iconecss" src="./public/images/1ressource.png" alt="Nourriture"> pommes
+                <input id="${apple}" class="form-control ecriture" value="${AppleTimer}" />
+            </div>
+            <style>
+                .img--container {
+                    border: 3px solid #62441D;
+                    border-radius: 8px;
+                    background: #9C723A;
+                    margin-bottom: inherit;
+                }
+                .image-1 {
+                    object-position: 50% 50%;
+                }
+            </style>
+        `);
     }
 
     const init = () => {
         var i = 0;
         while (i <= 23) {
-            timeByUnit(i);
+            placeBoxByUnit(i);
             i++;
         }
     }
 
     init();
+
+    for (let i = 0; i < 24; i++) {   
+      $(`#apple${i}`).on("change keyup paste", () => actualiseFromApple(i))
+      $(`#timer${i}`).on("change keyup paste", () => actualiseFromTime(i))
+    }
 }
 
 export default checkInit(['/reine'], [], resourcesTime);
