@@ -1,5 +1,6 @@
-import $ from 'jquery'
-import checkInit from './checkInit'
+import $ from 'jquery';
+import checkInit from './checkInit';
+import initBox from './utils/initBox';
 import { setCookie, getCookie } from './utils/manageCookies';
 
 function getTdc(name) {
@@ -38,20 +39,6 @@ function runAlliance(name) {
     return unit;
 }
 
-function initBox(){
-    $('.sideLeft .contenunavleft').after(`
-    <div class="contenusousnavleft">
-        <div class="interieur">
-            <center>Box Ali</center>
-            <div>
-                <table style="border-spacing: 2px;">
-                    <tbody id="boxAlliance"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>`);
-}
-
 function boxAlliance() {
     
     const pathname = window.location.pathname;
@@ -63,7 +50,7 @@ function boxAlliance() {
         getTdc("LN");
     }
 
-    initBox();
+    initBox("Box Alliance", "boxAlliance");
     runAlliance("OFC");
     runAlliance("LN");
 }
