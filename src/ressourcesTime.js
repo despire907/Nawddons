@@ -27,7 +27,7 @@ const resourcesTime = () => {
         var tab = time.split('');
         const find = tab.findIndex(e => e === toRemove);
     
-        if (find == undefined)
+        if (find === undefined)
             return time;
     
         tab.splice(find, 1);
@@ -44,7 +44,7 @@ const resourcesTime = () => {
     }
     
     function actualiseFromTime(box) {
-        const askTime = $(`#timer${box}`).val();
+        const askTime = $(`#tempsUnites${box}`).val();
         const unitTime = $(`#tempsUnite${box}`).text();
     
         const unitTimeinS = removeUnit(unitTime);
@@ -56,14 +56,14 @@ const resourcesTime = () => {
         const convertInApple = removeDecimal(toCraft * $(`#ressource${box}`).text());
     
         $(`#pondreUnite${box}`).val(toCraftNoDecimal);
-        $(`#apple${box}`).val(convertInApple);
+        $(`#ressources${box}`).val(convertInApple);
     }
     
     function actualiseFromApple(box) {
-        const askApple = $(`#apple${box}`).val();
+        const askApple = $(`#ressources${box}`).val();
         const unitApple = $(`#ressource${box}`).text();
     
-        const toCraft = askApple / unitApple
+        const toCraft = askApple / unitApple;
         const toCraftNoDecimal = removeDecimal(toCraft);
         $(`#pondreUnite${box}`).val(toCraftNoDecimal);
     }
@@ -71,40 +71,15 @@ const resourcesTime = () => {
     function placeBoxByUnit(count) {
         const tempsUnite = `#tempsUnite${count}`;
         const resource = `#ressource${count}`;
-
-        const timer = `timer${count}`;
-        const apple = `apple${count}`;
-
         const pondreUniteId = `pondreUnite${count}`;
 
         const Otimer = $(tempsUnite).text();
         const AppleTimer = $(resource).text();
-
-        const position = `#sectionUniteCout${count}`;
-
+        $(resource).after(`<input id="ressources${count}" value="${AppleTimer}" style="background-color: rgba(255, 255, 128, 0);border-color: rgba(255, 255, 128, 0);width: 80%;"></input>`);
+        $(resource).hide();
+        $(tempsUnite).after(`<input id="tempsUnites${count}" value="${Otimer}" style="background-color: rgba(255, 255, 128, 0);border-color: rgba(255, 255, 128, 0);width: 80%;"></input>`);
+        $(tempsUnite).hide();
         $(`#${pondreUniteId}`).val(1);
-
-        $(position).after(`
-            <div class="img--container">
-                <img src="./public/images/time.png" class="image-1 iconecss" alt="Temps"> temps (m, h, j, M)
-                <input id="${timer}" class="form-control ecriture" value="${Otimer}" />
-            </div>
-            <div class="img--container">
-                <img class=" image-1 iconecss" src="./public/images/1ressource.png" alt="Nourriture"> pommes
-                <input id="${apple}" class="form-control ecriture" value="${AppleTimer}" />
-            </div>
-            <style>
-                .img--container {
-                    border: 3px solid #62441D;
-                    border-radius: 8px;
-                    background: #9C723A;
-                    margin-bottom: inherit;
-                }
-                .image-1 {
-                    object-position: 50% 50%;
-                }
-            </style>
-        `);
     }
 
     const init = () => {
@@ -118,8 +93,8 @@ const resourcesTime = () => {
     init();
 
     for (let i = 0; i < 24; i++) {   
-      $(`#apple${i}`).on("change keyup paste", () => actualiseFromApple(i))
-      $(`#timer${i}`).on("change keyup paste", () => actualiseFromTime(i))
+      $(`#ressources${i}`).on("change keyup paste", () => actualiseFromApple(i))
+      $(`#tempsUnites${i}`).on("change keyup paste", () => actualiseFromTime(i))
     }
 }
 
