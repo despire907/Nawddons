@@ -6,6 +6,7 @@ import tmpBatiments from "./src/tmpBatiments";
 import copyFlood from "./src/copyFlood";
 import ressourcesTime from "./src/ressourcesTime"
 import boxAlliance from "./src/boxAlliance"
+import boxPlayer from "./src/boxPlayer";
 
 chatAlliance();
 convoiMembre();
@@ -15,3 +16,4 @@ tmpBatiments();
 copyFlood();
 ressourcesTime();
 boxAlliance();
+boxPlayer();
