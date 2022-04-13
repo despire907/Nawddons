@@ -8,7 +8,7 @@ function convoiMembre() {
     nodes.forEach((tr, idx) => {
         if (idx && tr.children[2].querySelector('b').innerText !== getUsername()) {
             const tdc = formatNumberFromHtml(tr.children[0].innerText);
-            const b = tr.children[3].querySelector('b')
+            const b = tr.children[4].querySelector('b')
             const a = b.querySelector('a');
             const name = a.querySelector('b').innerHTML;
             const atk = a.getAttribute('href');
