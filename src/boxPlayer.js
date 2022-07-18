@@ -162,6 +162,9 @@ const boxPlayer = () => {
                 _data.Unite.JeuneTank = tabs[15].innerHTML.substring(0, tabs[15].innerHTML.indexOf("unit")).replaceAll(" ", "");
                 _data.Unite.Tank = tabs[16].innerHTML.substring(0, tabs[16].innerHTML.indexOf("unit")).replaceAll(" ", "");
                 _data.Unite.TankElite = tabs[17].innerHTML.substring(0, tabs[17].innerHTML.indexOf("unit")).replaceAll(" ", "");
+
+                const capaTdc = (parseInt(_data.Unite.O) + parseInt(_data.Unite.OE) * 1000).toLocaleString('en-US');
+                $("#capaTdc").html(`${capaTdc}`);
             })
             .catch(error => console.error('error : ', error))
     }
@@ -206,7 +209,8 @@ const boxPlayer = () => {
         await getRecherche();
         await getUnite();
         await getProfilInfo();
-        _data.UpdateDate = Date.now();
+
+        _data.UpdateDate = new Date().toLocaleDateString("fr-FR");
 
         await uploadInfo();
         catchInfo()
@@ -235,6 +239,10 @@ const boxPlayer = () => {
         <tr>
             <td>ali: </td>
             <td id="ali"></td>
+        </tr>
+        <tr>
+            <td>tdc capa: </td>
+            <td id="capaTdc"></td>
         </tr>
         `);
         await catchInfo();
